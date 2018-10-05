@@ -40,7 +40,6 @@ def get_the_string(imPath):
     cv2.imwrite(src_path + "thres.jpg", img)
   # Run tesseract OCR on image
     text = pytesseract.image_to_string(Image.open(src_path+"thres.jpg"), config=config)
-
     #os.remove(temp)
     return text
 
