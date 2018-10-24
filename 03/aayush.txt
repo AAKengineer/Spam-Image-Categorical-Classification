@@ -1,2 +1,0 @@
-Notebook1:	Program to parse image files in a folder.
-Notebook2:	Face Detection using Haar Cascades
