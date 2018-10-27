@@ -10,8 +10,6 @@ cap = cv2.imread("C:/Users/Aayush/Desktop/major 1/upes.jpg")
   
 # loop runs if capturing has been initialized 
 while(1): 
-  
-    # reads frames from a camera 
     frame = cap
   
     # converting BGR to HSV 
