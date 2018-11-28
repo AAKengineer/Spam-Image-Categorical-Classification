@@ -7,7 +7,7 @@ import pytesseract
 import cv2
 import sys
 
-src_path="C:/Users/Aayush/Desktop/major 1/"
+src_path="C:/Users/Aayush/Desktop/Test/315504-Hope-You-Have-A-Blessed-Sleep-Sweet-Dreams-And-Good-Night-.jpg"
 
 def get_the_string(imPath):
     #if len(sys.argv) < 2:
@@ -23,7 +23,7 @@ def get_the_string(imPath):
     img = cv2.imread(imPath, cv2.IMREAD_COLOR)
 
     #Convert to gray
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    #img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # Apply dilation and erosion to remove some noise
     kernel = np.ones((1, 1), np.uint8)
@@ -31,20 +31,24 @@ def get_the_string(imPath):
     img = cv2.erode(img, kernel, iterations=1)
 
     # Write image after removed noise
-    cv2.imwrite(src_path + "removed_noise.jpg", img)
+    #cv2.imwrite(src_path + "removed_noise.jpg", img)
 
     #  Apply threshold to get image with only black and white
     #img = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 2)
 
     # Write the image after apply opencv to do some ...
-    cv2.imwrite(src_path + "thres.jpg", img)
+    path="E:/spam_image_categorical_classification/02/pre/thres.jpg"
+    cv2.imwrite(path, img)
   # Run tesseract OCR on image
-    text = pytesseract.image_to_string(Image.open(src_path+"thres.jpg"), config=config)
+    text = pytesseract.image_to_string(Image.open(path), config=config)
+    #text = text.lower()
+    #string_list= list(text.split(" "))
+    #print(string_list)
     #os.remove(temp)
     return text
 
 
 if __name__ == '__main__':
     print("Recognizing text from image")
-    result= get_the_string(src_path+"upes.jpg")
+    result= get_the_string(src_path)
     print(result)
