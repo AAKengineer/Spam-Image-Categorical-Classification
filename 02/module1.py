@@ -7,7 +7,7 @@ import pytesseract
 import cv2
 import sys
 
-src_path="C:/Users/Aayush/Desktop/Test/315504-Hope-You-Have-A-Blessed-Sleep-Sweet-Dreams-And-Good-Night-.jpg"
+src_path="C:/Users/Aayush/Desktop/Test/donc3a2e282ace284a2t-chase-people-inspirational-life-quotes.jpg"
 
 def get_the_string(imPath):
     #if len(sys.argv) < 2:

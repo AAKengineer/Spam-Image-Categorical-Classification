@@ -62,7 +62,7 @@ def checkforspam(im):
     string = string.lower()
     string_list= list(string.split(" "))
     
-    f = open("C:\Users\Aayush\Desktop\Spam.csv","r")
+    f = open("Spam.csv","r")
 
     reader = csv.reader(f)
     spam_list=[]

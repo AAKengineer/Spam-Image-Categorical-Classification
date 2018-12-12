@@ -1,18 +1,21 @@
 import cv2
 import os
 import module3 as m3
+import module4 as m4
 
 folder = "C:/Users/Aayush/Desktop/Test"  #Directory
-#s1= "C:/Users/Aayush/Desktop/1"
-#s2= "C:/Users/Aayush/Desktop/2"
 images = []
 count = 0
-dir1='C:/Users/Aayush/Desktop/output/1'
-dir2='C:/Users/Aayush/Desktop/output/2'
-dir3='C:/Users/Aayush/Desktop/output/3'
+dir1='C:/Users/Aayush/Desktop/output/Docs'
+dir2='C:/Users/Aayush/Desktop/output/Spam'
+dir3='C:/Users/Aayush/Desktop/output/Quotes'
+dir4='C:/Users/Aayush/Desktop/output/withFaces'
+dir5='C:/Users/Aayush/Desktop/output/Misc'
 os.mkdir(dir1)
 os.mkdir(dir2)
 os.mkdir(dir3)
+os.mkdir(dir4)
+os.mkdir(dir5)
 
 for filename in os.listdir(folder):
     #if filename.endswith(".jpg") or filename.endswith(".png"):
@@ -31,10 +34,16 @@ for filename in os.listdir(folder):
         cv2.imwrite(os.path.join(dir1,filename),img)
 
     elif(r>=20 and r<80):
-        if m3.checkforspam(im):
-            cv2.imwrite(os.path.join(dir2,filename),img)
-        else:
+        if m4.checkforface(img):
             cv2.imwrite(os.path.join(dir3,filename),img)
+    elif(r<20):
+        if m4.checkforface(img):
+            cv2.imwrite(os.path.join(dir4,filename),img)
+    else:
+        cv2.imwrite(os.path.join(dir5,filename),img)
+        
+            
+        
 
 
 
