@@ -21,30 +21,26 @@ for filename in os.listdir(folder):
     #if filename.endswith(".jpg") or filename.endswith(".png"):
     im=os.path.join(folder,filename)
     img = cv2.imread(im)
-    if img is not None:
-        images.append(img)
-        count = count + 1
-
+    
     r= m3.captch_ex(im)
     print(r)
-
-    if m3.checkforspam(im):
-        cv2.imwrite(os.path.join(dir2,filename),img)
-    elif(r>=80):
-        cv2.imwrite(os.path.join(dir1,filename),img)
-
-    elif(r>=20 and r<80):
-        if m4.checkforface(img):
+    if r>25:
+        spam,nlines=m3.checkforspam(im)
+        #print(spam)
+        if spam:
+            cv2.imwrite(os.path.join(dir2,filename),img)
+        elif(r>=80 and nlines>7):
+            cv2.imwrite(os.path.join(dir1,filename),img)
+        elif nlines>1:
             cv2.imwrite(os.path.join(dir3,filename),img)
-    elif(r<20):
+        else:
+            r=25
+
+    if r<=25:
         if m4.checkforface(img):
             cv2.imwrite(os.path.join(dir4,filename),img)
-    else:
-        cv2.imwrite(os.path.join(dir5,filename),img)
-        
+        else:
+            cv2.imwrite(os.path.join(dir5,filename),img)
             
-        
-
-
 
 #print("No. of images in folder = " + str(count))

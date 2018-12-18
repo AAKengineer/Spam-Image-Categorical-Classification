@@ -7,11 +7,11 @@ import pytesseract
 import cv2
 import sys
 
-src_path="C:/Users/Aayush/Desktop/Test/donc3a2e282ace284a2t-chase-people-inspirational-life-quotes.jpg"
+src_path="C:/Users/Aayush/Desktop/Test/IMG-20181216-WA0050.jpg"
 
 def get_the_string(imPath):
     #if len(sys.argv) < 2:
-     #   print('Usage: python ocr_simple.py image.jpg')
+     #print('Usage: python ocr_simple.py image.jpg')
      
   # pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 
@@ -41,14 +41,18 @@ def get_the_string(imPath):
     cv2.imwrite(path, img)
   # Run tesseract OCR on image
     text = pytesseract.image_to_string(Image.open(path), config=config)
+    #print(pytesseract.image_to_data(Image.open(path)))
     #text = text.lower()
     #string_list= list(text.split(" "))
     #print(string_list)
     #os.remove(temp)
-    return text
+    nlines = text.count('\n')
+    nlines= nlines+1
+    #print(text)
+    return text,nlines
 
 
 if __name__ == '__main__':
     print("Recognizing text from image")
     result= get_the_string(src_path)
-    print(result)
+    #print(result)

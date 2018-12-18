@@ -3,10 +3,11 @@ import module1 as m1
 import csv
 
 def captch_ex(file_name):
+
     img = cv2.imread(file_name)
     r,c,channels= img.shape
     T_area=r*c
-    
+    #print(T_area)
     img_final = cv2.imread(file_name)
     img2gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     ret, mask = cv2.threshold(img2gray, 180, 255, cv2.THRESH_BINARY)
@@ -18,13 +19,11 @@ def captch_ex(file_name):
     kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (3,
                                                          3))  # to manipulate the orientation of dilution , large x means horizonatally dilating  more, large y means vertically dilating more
     dilated = cv2.dilate(new_img, kernel, iterations=9)  # dilate , more the iteration more the dilation
-
+    
     # for cv2.x.x
-
     _, contours, hierarchy = cv2.findContours(dilated, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)  # findContours returns 3 variables for getting contours
 
     # for cv3.x.x comment above line and uncomment line below
-
     #image, contours, hierarchy = cv2.findContours(dilated,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
 
     area=0
@@ -38,27 +37,29 @@ def captch_ex(file_name):
 
         # draw rectangle around contour on original image
         cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 255), 2)
-
+        #cv2.imwrite('contour_image.jpg', img)
         cropped = img_final[y :y +  h , x : x + w]
+        
         r,c,channels= cropped.shape
         ar =r*c
+        #print(area)
         area= area+ar
         '''
         #you can crop image and send to OCR  , false detected will return no text :)
-
         s = file_name + '/crop_' + str(index) + '.jpg' 
         cv2.imwrite(s , cropped)
         index = index + 1
-
         '''
+    #cv2.imshow('captcha_result', img)
+    #cv2.waitKey()
+    
     percent  =(area*100)/T_area
     if(percent>=100):
         percent=98
-    # write original image with added contours to disk
     return percent
 
 def checkforspam(im):
-    string = m1.get_the_string(im)
+    string,nlines = m1.get_the_string(im)
     string = string.lower()
     string_list= list(string.split(" "))
     
@@ -74,6 +75,10 @@ def checkforspam(im):
     for item in string_list:
         for item1 in spam_list:
             if item == item1:
-                return True
+                return True,nlines
 
-    return False
+    return False,nlines
+
+#p="C:/Users/Aayush/Desktop/Test/IMG-20181216-WA0079.jpg"
+#print(captch_ex(p))
+

@@ -15,6 +15,6 @@ def checkforface(image):
     else:
         return False
 
-img=r"C:/Users/Aayush/Desktop/Test/rainbow-finger.jpg"
-img=cv2.imread(img)
-print(checkforface(img))
+#img=r"C:/Users/Aayush/Desktop/Test/rainbow-finger.jpg"
+#img=cv2.imread(img)
+#print(checkforface(img))
