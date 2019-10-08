@@ -11,9 +11,9 @@ Intro
 
 ## Authors
 
-**Aayush Grover**(https://github.com/aykgrover)
-**Aayush Verma**(https://github.com/vermaayu)
-**Komal Makkar**(https://github.com/Makkomal)
+[**Aayush Grover**](https://github.com/aykgrover)
+[**Aayush Verma**](https://github.com/vermaayu)
+[**Komal Makkar**](https://github.com/Makkomal)
 
 
 ## License
